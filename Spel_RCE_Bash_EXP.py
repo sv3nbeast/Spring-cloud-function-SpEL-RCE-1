@@ -71,6 +71,6 @@ if __name__ == '__main__' :
         cmd3 =sys.argv[3]
         bash(cmd1,cmd2,cmd3)
     except:
-        print('异常')
+        print('用法')
         print('python demo.py url lhost lport')
         pass
