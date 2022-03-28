@@ -66,6 +66,6 @@ if __name__ == '__main__' :
         t=threading.Thread(target=scan(cmd1,'whoami') )#默认使用whoami进行批量检测
         t.start()
     except:
-        print('异常')
+        print('用法')
         print('python demo.py url.txt')
         pass
